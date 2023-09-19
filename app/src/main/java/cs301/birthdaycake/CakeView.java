@@ -37,7 +37,6 @@ public class CakeView extends SurfaceView {
     private CakeModel cakeModel;
 
 
-
     /**
      * ctor must be overridden here as per standard Java inheritance practice.  We need it
      * anyway to initialize the member variables
@@ -65,7 +64,6 @@ public class CakeView extends SurfaceView {
         setBackgroundColor(Color.WHITE);  //better than black default
 
         cakeModel = new CakeModel();
-
     }
 
     /**
@@ -125,9 +123,13 @@ public class CakeView extends SurfaceView {
         //Then a second cake layer
         canvas.drawRect(cakeLeft, top, cakeLeft + cakeWidth, bottom, cakePaint);
 
-        //Now a candle in the center
-        drawCandle(canvas, cakeLeft + cakeWidth/3 - candleWidth/2, cakeTop);
-        drawCandle(canvas, cakeLeft + (2*cakeWidth/3) - candleWidth/2, cakeTop);
+        //draw candles
+        for (int k = 1; k <= cakeModel.numCandle; k++) {
+            drawCandle(canvas, cakeLeft + (k * cakeWidth/(cakeModel.numCandle+1)) - candleWidth/2, cakeTop);
+        }
+//        drawCandle(canvas, cakeLeft + cakeWidth/4 - candleWidth/2, cakeTop);
+//        drawCandle(canvas, cakeLeft + (2*cakeWidth/4) - candleWidth/2, cakeTop);
+//        drawCandle(canvas, cakeLeft + (3*cakeWidth/4) - candleWidth/2, cakeTop);
 
     }//onDraw
 

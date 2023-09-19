@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RadioGroup;
+import android.widget.SeekBar;
 import android.widget.Switch;
 
 public class MainActivity extends AppCompatActivity  {
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity  {
     private CakeView baseView;
     private Button blowOutButton;
     private Switch candleSwitch;
+    private SeekBar numCandleSeek;
 
 
     @Override
@@ -27,7 +29,8 @@ public class MainActivity extends AppCompatActivity  {
         baseView = findViewById(R.id.cakeview);
         blowOutButton = findViewById(R.id.blowOutButton);
         candleSwitch = findViewById(R.id.candleSwitch);
-        CakeController controller = new CakeController(baseView, blowOutButton, candleSwitch);
+        numCandleSeek = findViewById(R.id.numCandleSeek);
+        CakeController controller = new CakeController(baseView, blowOutButton, candleSwitch, numCandleSeek);
     }
 
 
