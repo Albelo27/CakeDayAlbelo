@@ -71,14 +71,14 @@
             android:orientation="vertical">
 
             <Switch
-                android:id="@+id/switch2"
+                android:id="@+id/frostingSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="Frosting" />
 
             <Switch
-                android:id="@+id/switch1"
+                android:id="@+id/candleSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"

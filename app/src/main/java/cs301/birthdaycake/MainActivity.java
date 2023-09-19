@@ -6,12 +6,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.RadioGroup;
+import android.widget.Switch;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity  {
 
     private CakeView baseView;
-    private Button goodBye;
-    private Button blowOut;
+    private Button blowOutButton;
+    private Switch candleSwitch;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,20 +25,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         baseView = findViewById(R.id.cakeview);
-        CakeController controller = new CakeController(baseView);
-
-        goodBye = findViewById(R.id.goodbyeButton);
-        blowOut = findViewById(R.id.blowOutButton);
-        goodBye.setOnClickListener(this);
-        blowOut.setOnClickListener(this);
+        blowOutButton = findViewById(R.id.blowOutButton);
+        candleSwitch = findViewById(R.id.candleSwitch);
+        CakeController controller = new CakeController(baseView, blowOutButton, candleSwitch);
     }
 
-    @Override
-    public void onClick(View view) {
-        if (view.getId() == R.id.blowOutButton) {
-            baseView.getModel().candleLit = false;
-            baseView.invalidate();
-        }
 
-    }
 }
