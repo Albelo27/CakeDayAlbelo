@@ -11,6 +11,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private CakeView baseView;
     private Button goodBye;
+    private Button blowOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +24,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         CakeController controller = new CakeController(baseView);
 
         goodBye = findViewById(R.id.goodbyeButton);
+        blowOut = findViewById(R.id.blowOutButton);
         goodBye.setOnClickListener(this);
+        blowOut.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        Log.i("info", "goodbye");
+        if (view.getId() == R.id.blowOutButton) {
+            baseView.getModel().candleLit = false;
+            baseView.invalidate();
+        }
+
     }
 }
