@@ -72,7 +72,7 @@ public class CakeView extends SurfaceView {
      */
     public void drawCandle(Canvas canvas, float left, float bottom) {
         if (cakeModel.hasCanlde) {
-            canvas.drawRect(left, bottom - candleHeight, left + candleWidth, bottom, candlePaint);
+            canvas.drawRect(left, bottom - candleHeight, left + candleWidth + candleWidth, bottom, candlePaint);
             //draw the wick
             float wickLeft = left + candleWidth/2 - wickWidth/2;
             float wickTop = bottom - wickHeight - candleHeight;
