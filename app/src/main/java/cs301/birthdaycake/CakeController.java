@@ -2,19 +2,22 @@ package cs301.birthdaycake;
 
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
 
-public class CakeController implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, SeekBar.OnSeekBarChangeListener{
+public class CakeController implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, SeekBar.OnSeekBarChangeListener, View.OnTouchListener{
 
     private CakeView cakeView;
     private CakeModel cakeModel;
     private Button blowOut;
     private Switch candle;
     private SeekBar numCandleSeek;
+
 
     public CakeController(CakeView view, Button blowOutButton, Switch candleSwitch, SeekBar candleBar) {
         cakeView = view;
@@ -25,6 +28,7 @@ public class CakeController implements View.OnClickListener, CompoundButton.OnCh
         blowOut.setOnClickListener(this);
         candle.setOnCheckedChangeListener(this);
         numCandleSeek.setOnSeekBarChangeListener(this);
+        cakeView.setOnTouchListener(this);
     }
 
     @Override
@@ -55,9 +59,22 @@ public class CakeController implements View.OnClickListener, CompoundButton.OnCh
         cakeView.invalidate();
     }
 
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        cakeModel.displayCords = true;
+        cakeModel.xPos =  (int) motionEvent.getX();
+        cakeModel.yPos = (int) motionEvent.getY();
+        Log.i("xValue: ", Float.toString(motionEvent.getX()));
+        Log.i("yValue: ", Float.toString(motionEvent.getY()));
+        cakeView.invalidate();
+        return false;
+    }
+
     //unused implemented methods
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {}
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {}
+
+
 }
