@@ -4,9 +4,11 @@ public class CakeModel {
 
     boolean candleLit = true;
     boolean hasFrosting = true;
-    boolean hasCanlde = true;
+    boolean hasCandle = true;
     boolean displayCords = false;
     int numCandle = 2;
+    float xGrid;
+    float yGrid;
     int xPos;
     int yPos;
 

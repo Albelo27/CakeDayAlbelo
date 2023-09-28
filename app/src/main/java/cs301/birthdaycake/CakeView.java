@@ -5,7 +5,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
+import android.view.View;
 
 public class CakeView extends SurfaceView {
 
@@ -17,6 +19,9 @@ public class CakeView extends SurfaceView {
     Paint innerFlamePaint = new Paint();
     Paint wickPaint = new Paint();
     Paint textPaint = new Paint();
+
+    //added
+    Paint checkeredPaint = new Paint();
 
     /* These constants define the dimensions of the cake.  While defining constants for things
         like this is good practice, we could be calculating these better by detecting
@@ -45,7 +50,6 @@ public class CakeView extends SurfaceView {
      * anyway to initialize the member variables
      */
     public CakeView(Context context, AttributeSet attrs) {
-
         super(context, attrs);
 
         //This is essential or your onDraw method won't get called
@@ -77,7 +81,7 @@ public class CakeView extends SurfaceView {
      * the position of the bottom left corner of the candle
      */
     public void drawCandle(Canvas canvas, float left, float bottom) {
-        if (cakeModel.hasCanlde) {
+        if (cakeModel.hasCandle) {
             canvas.drawRect(left, bottom - candleHeight, left + candleWidth + candleWidth, bottom, candlePaint);
             //draw the wick
             float wickLeft = left + candleWidth/2 - wickWidth/2;
@@ -105,7 +109,8 @@ public class CakeView extends SurfaceView {
      * This method will draw a birthday cake
      */
     @Override
-    public void onDraw(Canvas canvas) {
+    public void onDraw(Canvas canvas)
+    {
         //top and bottom are used to keep a running tally as we progress down the cake layers
         float top = cakeTop;
         float bottom = cakeTop + frostHeight;
@@ -144,16 +149,49 @@ public class CakeView extends SurfaceView {
             // Draw the balloon string
             canvas.drawLine(balloonX, balloonY, balloonX, balloonY + 200, paint);
         }
+        //added
+        drawCheckered(canvas);
     }
         public void setBalloonLocation(float x, float y) {
         balloonX = x;
         balloonY = y;
         invalidate(); // Redraw the View with the new balloon location
 
-    }//onDraw
+
+
+    }
 
     public CakeModel getModel() {
         return cakeModel;
     }
+
+    //added
+    public void drawCheckered(Canvas canvas){
+        float x = cakeModel.xGrid;
+        float y = cakeModel.yGrid;
+        for(int i = 1; i<=2; i++){
+            //draws a green rectangle
+            if(i%2 != 0){
+                checkeredPaint.setColor(Color.GREEN);
+                checkeredPaint.setStyle(Paint.Style.FILL);
+
+                //green 1
+                canvas.drawRect(x-10, y-5, x, y, checkeredPaint);
+                //green 2
+                canvas.drawRect(x, y, x+10, y+5, checkeredPaint);
+            }
+            //draws a red rectangle
+            if(i%2 == 0){
+                checkeredPaint.setColor(Color.RED);
+                checkeredPaint.setStyle(Paint.Style.FILL);
+
+                //red 1
+                canvas.drawRect(x-10, y, x, y+5, checkeredPaint);
+                //red2
+                canvas.drawRect(x, y-5, x+10, y, checkeredPaint);
+            }
+        }
+    }
+
 }//class CakeView
 

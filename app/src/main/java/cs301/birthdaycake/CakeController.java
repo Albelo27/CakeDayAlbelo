@@ -47,7 +47,7 @@ public class CakeController implements View.OnClickListener, CompoundButton.OnCh
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            cakeModel.hasCanlde = compoundButton.isChecked();
+            cakeModel.hasCandle = compoundButton.isChecked();
             cakeView.invalidate();
     }
 
@@ -67,6 +67,14 @@ public class CakeController implements View.OnClickListener, CompoundButton.OnCh
         Log.i("xValue: ", Float.toString(motionEvent.getX()));
         Log.i("yValue: ", Float.toString(motionEvent.getY()));
         cakeView.setBalloonLocation(motionEvent.getX(),motionEvent.getY());
+        float x = motionEvent.getX();
+        float y = motionEvent.getY();
+
+        if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){
+            cakeModel.xGrid = x;
+            cakeModel.yGrid = y;
+            return true;
+        }
         cakeView.invalidate();
         return false;
     }
@@ -76,4 +84,5 @@ public class CakeController implements View.OnClickListener, CompoundButton.OnCh
     public void onStartTrackingTouch(SeekBar seekBar) {}
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {}
+
 }
