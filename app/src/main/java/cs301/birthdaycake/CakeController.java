@@ -1,14 +1,20 @@
 package cs301.birthdaycake;
 
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
 
-public class CakeController implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, SeekBar.OnSeekBarChangeListener{
+public class CakeController implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, SeekBar.OnSeekBarChangeListener, View.OnTouchListener{
 
     private CakeView cakeView;
     private CakeModel cakeModel;
@@ -25,6 +31,7 @@ public class CakeController implements View.OnClickListener, CompoundButton.OnCh
         blowOut.setOnClickListener(this);
         candle.setOnCheckedChangeListener(this);
         numCandleSeek.setOnSeekBarChangeListener(this);
+        cakeView.setOnTouchListener(this);
     }
 
     @Override
@@ -53,6 +60,12 @@ public class CakeController implements View.OnClickListener, CompoundButton.OnCh
         String test = Integer.toString(seekBar.getProgress());
         Log.d("seekbar", test);
         cakeView.invalidate();
+    }
+    @Override
+    public boolean onTouch(View view, MotionEvent balloon) {
+    cakeView.setBalloonLocation(balloon.getX(),balloon.getY());
+
+    return false;
     }
 
     //unused implemented methods

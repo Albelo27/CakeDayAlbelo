@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity  {
     private SeekBar numCandleSeek;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //auto-generated config

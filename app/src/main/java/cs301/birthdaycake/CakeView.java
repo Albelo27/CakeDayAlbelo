@@ -35,13 +35,15 @@ public class CakeView extends SurfaceView {
     public static final float innerFlameRadius = 15.0f;
 
     private CakeModel cakeModel;
-
+    private float balloonX;
+    private float balloonY;
 
     /**
      * ctor must be overridden here as per standard Java inheritance practice.  We need it
      * anyway to initialize the member variables
      */
     public CakeView(Context context, AttributeSet attrs) {
+
         super(context, attrs);
 
         //This is essential or your onDraw method won't get called
@@ -99,8 +101,7 @@ public class CakeView extends SurfaceView {
      * This method will draw a birthday cake
      */
     @Override
-    public void onDraw(Canvas canvas)
-    {
+    public void onDraw(Canvas canvas) {
         //top and bottom are used to keep a running tally as we progress down the cake layers
         float top = cakeTop;
         float bottom = cakeTop + frostHeight;
@@ -125,14 +126,27 @@ public class CakeView extends SurfaceView {
 
         //draw candles
         for (int k = 1; k <= cakeModel.numCandle; k++) {
-            drawCandle(canvas, cakeLeft + (k * cakeWidth/(cakeModel.numCandle+1)) - candleWidth/2, cakeTop);
+            drawCandle(canvas, cakeLeft + (k * cakeWidth / (cakeModel.numCandle + 1)) - candleWidth / 2, cakeTop);
         }
+
+        if (balloonX >= 0 && balloonY >= 0) {
+            // Draw the balloon
+            Paint paint = new Paint();
+            paint.setColor(Color.BLUE);
+            canvas.drawCircle(balloonX, balloonY - 100, 100, paint);
+            // Draw the balloon string
+            canvas.drawLine(balloonX, balloonY, balloonX, balloonY + 200, paint);
+        }
+    }
+        public void setBalloonLocation(float x, float y) {
+        balloonX = x;
+        balloonY = y;
+        invalidate(); // Redraw the View with the new balloon location
 
     }//onDraw
 
     public CakeModel getModel() {
         return cakeModel;
     }
-
 }//class CakeView
 
